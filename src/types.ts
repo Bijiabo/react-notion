@@ -62,9 +62,11 @@ type ColorFormatType = ["h", ColorType];
 type DateFormatType = [
   "d",
   {
-    type: "date";
+    type: "date" | "datetime";
     start_date: string;
+    start_time: string;
     date_format: string;
+    time_zone: string;
   }
 ];
 type UserFormatType = ["u", string];

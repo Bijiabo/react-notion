@@ -1,4 +1,8 @@
 import * as React from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import {
   DecorationType,
   BlockType,
@@ -16,6 +20,10 @@ import Code from "./components/code";
 import PageIcon from "./components/page-icon";
 import PageHeader from "./components/page-header";
 import { classNames, getTextContent, getListNumber } from "./utils";
+
+dayjs.extend(relativeTime);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const createRenderChildText = (
   customDecoratorComponents?: CustomDecoratorComponents
@@ -52,8 +60,51 @@ export const createRenderChildText = (
                 {element}
               </a>
             );
+          case "d": {
+            console.log("@date", element, decorator);
+            // date
+            const {
+              date_format,
+              start_date,
+              start_time,
+              time_zone,
+              type
+            } = decorator[1];
+            let time;
+            switch (type) {
+              case "datetime":
+                time = dayjs(`${start_date} ${start_time}`);
+                console.log("@@@", `${start_date} ${start_time}`);
+                break;
+              default:
+                time = dayjs(start_date);
+                break;
+            }
+
+            if (time_zone && time) {
+              time.tz(time_zone);
+            } else {
+              time.tz("Asia/Shanghai");
+            }
+
+            let timeStringForDisplay = "";
+            switch (true) {
+              case date_format === "relative" && type === "datetime":
+                // timeStringForDisplay = time.fromNow();
+                timeStringForDisplay = time.format("YYYY/MM/DD HH:MM");
+                break;
+              default:
+                timeStringForDisplay = time.format("YYYY/MM/DD");
+                break;
+            }
+            console.log("@timeStringForDisplay", timeStringForDisplay);
+            return (
+              <React.Fragment key={i}>{timeStringForDisplay}</React.Fragment>
+            );
+          }
 
           default:
+            console.log("@unknow block", element, decorator);
             return <React.Fragment key={i}>{element}</React.Fragment>;
         }
       };
