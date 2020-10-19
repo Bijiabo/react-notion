@@ -218,6 +218,9 @@ img.notion-page-icon-offset {
   text-decoration: underline;
   text-decoration-color: inherit;
 }
+.notion-date {
+  color: #a2a19e;
+}
 .notion-blank {
   min-height: 1rem;
   padding: 3px 2px;

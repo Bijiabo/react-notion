@@ -61,7 +61,6 @@ export const createRenderChildText = (
               </a>
             );
           case "d": {
-            console.log("@date", element, decorator);
             // date
             const {
               date_format,
@@ -97,14 +96,15 @@ export const createRenderChildText = (
                 timeStringForDisplay = time.format("YYYY/MM/DD");
                 break;
             }
-            console.log("@timeStringForDisplay", timeStringForDisplay);
+
             return (
-              <React.Fragment key={i}>{timeStringForDisplay}</React.Fragment>
+              <span className="notion-date" key={i}>
+                {timeStringForDisplay}
+              </span>
             );
           }
 
           default:
-            console.log("@unknow block", element, decorator);
             return <React.Fragment key={i}>{element}</React.Fragment>;
         }
       };
