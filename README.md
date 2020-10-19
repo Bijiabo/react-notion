@@ -1,3 +1,5 @@
+## The current version is just a personal test version
+
 ![react-notion](https://user-images.githubusercontent.com/1440854/79684011-6c948280-822e-11ea-9e23-1644903796fb.png)
 
 ![npm version](https://badgen.net/npm/v/react-notion) ![npm version](https://badgen.net/david/dep/splitbee/react-notion) ![minzipped sized](https://badgen.net/bundlephobia/minzip/react-notion)
@@ -117,6 +119,7 @@ Most common block types are supported. We happily accept pull requests to add su
 | Databases         | ❌ Missing |                        |
 | Checkbox          | ❌ Missing |                        |
 | Table Of Contents | ❌ Missing |                        |
+| Date              | ✅ Yes     | set default timezone as Shanghai |
 
 ## Block Type Specific Caveats
 
